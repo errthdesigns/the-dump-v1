@@ -300,6 +300,22 @@
             background: #1a1a1a;
             color: #8a8a8a;
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .audio-controls {
+                display: none;
+            }
+
+            .header {
+                justify-content: space-between;
+                padding: 20px 24px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -361,7 +377,7 @@
         const { Engine, Render, Runner, Bodies, Body, Composite, Mouse, MouseConstraint, Events } = Matter;
 
         // Rock configurations with different visual styles
-        const rockConfigs = [
+        const allRockConfigs = [
             { id: 'turquoise', color: '#4fb8a8', size: 120, density: 0.003, shape: 'round', texture: 'smooth' },
             { id: 'jade', color: '#7aa87a', size: 100, density: 0.002, shape: 'angular', texture: 'rough' },
             { id: 'granite', color: '#c4b8a8', size: 220, density: 0.006, shape: 'irregular', texture: 'rough' },
@@ -385,6 +401,12 @@
             { id: 'pearl', color: '#f4f0e8', size: 90, density: 0.002, shape: 'round', texture: 'smooth' },
             { id: 'agate', color: '#b89c8c', size: 140, density: 0.004, shape: 'oval', texture: 'smooth' }
         ];
+
+        // Detect if mobile device
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+        // Use fewer stones on mobile (first 12), all stones on desktop
+        const rockConfigs = isMobile ? allRockConfigs.slice(0, 12) : allRockConfigs;
 
         // Audio context and sources
         let audioContext = null;
