@@ -257,7 +257,6 @@
             align-items: center;
             justify-content: center;
             z-index: 500;
-            cursor: pointer;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         
@@ -281,6 +280,25 @@
             text-transform: uppercase;
             color: #1a1a1a;
             opacity: 0.6;
+            margin-bottom: 48px;
+        }
+
+        .enter-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            background: none;
+            border: 1px solid #1a1a1a;
+            padding: 12px 32px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .enter-btn:hover {
+            background: #1a1a1a;
+            color: #8a8a8a;
         }
     </style>
 </head>
@@ -292,8 +310,9 @@
     
     <!-- Audio start prompt -->
     <div class="audio-prompt" id="audioPrompt">
-        <div class="audio-prompt-text">THE DUMP</div>
-        <div class="audio-prompt-hint">A mindfulness experience...</div>
+        <div class="audio-prompt-text">The Dump</div>
+        <div class="audio-prompt-hint">A mindfulness experience</div>
+        <button class="enter-btn" id="enterBtn">Enter</button>
     </div>
     
     <!-- Header -->
@@ -846,8 +865,9 @@
                 document.getElementById('loading').classList.add('hidden');
             }, 500);
             
-            // Audio prompt click handler
-            document.getElementById('audioPrompt').addEventListener('click', () => {
+            // Enter button click handler
+            document.getElementById('enterBtn').addEventListener('click', (e) => {
+                e.stopPropagation();
                 audioStarted = true;
                 initAudio();
                 document.getElementById('audioPrompt').classList.add('hidden');
