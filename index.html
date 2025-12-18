@@ -395,9 +395,53 @@
         };
         let audioStarted = false;
 
+        // Device orientation tracking
+        let tiltEnabled = false;
+
         // Create engine
         const engine = Engine.create();
         engine.gravity.y = 0.8;
+
+        // Device orientation handler for mobile tilt controls
+        function handleOrientation(event) {
+            if (!tiltEnabled) return;
+
+            // Get device orientation (beta = front-to-back tilt, gamma = left-to-right tilt)
+            const beta = event.beta;  // -180 to 180 (front to back)
+            const gamma = event.gamma; // -90 to 90 (left to right)
+
+            // Convert device tilt to gravity
+            // Normalize the values and apply to gravity
+            const gravityX = Math.sin(gamma * Math.PI / 180) * 1.5;
+            const gravityY = Math.sin(beta * Math.PI / 180) * 1.5;
+
+            // Update engine gravity
+            engine.gravity.x = gravityX;
+            engine.gravity.y = Math.abs(gravityY) < 0.3 ? 0.8 : gravityY;
+        }
+
+        // Request device orientation permission (required for iOS 13+)
+        function requestMotionPermission() {
+            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS 13+ requires permission
+                DeviceOrientationEvent.requestPermission()
+                    .then(response => {
+                        if (response === 'granted') {
+                            enableTiltControls();
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Non-iOS or older iOS, just enable
+                enableTiltControls();
+            }
+        }
+
+        // Enable tilt controls
+        function enableTiltControls() {
+            tiltEnabled = true;
+            window.addEventListener('deviceorientation', handleOrientation);
+        }
 
         // Create renderer (invisible - we use custom visuals)
         const interactionArea = document.getElementById('interaction-area');
@@ -881,6 +925,9 @@
                 audioStarted = true;
                 initAudio();
                 document.getElementById('audioPrompt').classList.add('hidden');
+
+                // Enable tilt controls for mobile devices
+                requestMotionPermission();
             });
             
             // Slider event listeners - these work after audio is initialized
