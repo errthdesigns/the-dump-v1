@@ -317,7 +317,7 @@
     
     <!-- Header -->
     <header class="header">
-        <div class="logo">Stone Garden</div>
+        <div class="logo">The Dump</div>
         
         <div class="audio-controls">
             <div class="audio-control">
@@ -373,7 +373,17 @@
             { id: 'quartz', color: '#c8d4dc', size: 110, density: 0.003, shape: 'angular', texture: 'crystalline' },
             { id: 'limestone', color: '#d4c8b4', size: 160, density: 0.003, shape: 'irregular', texture: 'rough' },
             { id: 'basalt', color: '#4a4a4a', size: 130, density: 0.005, shape: 'angular', texture: 'rough' },
-            { id: 'coral', color: '#f4e4d8', size: 135, density: 0.002, shape: 'irregular', texture: 'porous' }
+            { id: 'coral', color: '#f4e4d8', size: 135, density: 0.002, shape: 'irregular', texture: 'porous' },
+            { id: 'amethyst', color: '#9b7bb3', size: 145, density: 0.004, shape: 'angular', texture: 'crystalline' },
+            { id: 'rose-quartz', color: '#e8a4a8', size: 125, density: 0.003, shape: 'round', texture: 'smooth' },
+            { id: 'slate', color: '#5a6a7a', size: 155, density: 0.005, shape: 'angular', texture: 'rough' },
+            { id: 'terracotta', color: '#c88a6c', size: 115, density: 0.003, shape: 'irregular', texture: 'rough' },
+            { id: 'jade-light', color: '#a8c4a8', size: 95, density: 0.002, shape: 'oval', texture: 'smooth' },
+            { id: 'onyx', color: '#3a3a3a', size: 165, density: 0.006, shape: 'angular', texture: 'smooth' },
+            { id: 'seafoam', color: '#8fc4b8', size: 105, density: 0.002, shape: 'round', texture: 'smooth' },
+            { id: 'amber', color: '#d4a84c', size: 135, density: 0.003, shape: 'irregular', texture: 'smooth' },
+            { id: 'pearl', color: '#f4f0e8', size: 90, density: 0.002, shape: 'round', texture: 'smooth' },
+            { id: 'agate', color: '#b89c8c', size: 140, density: 0.004, shape: 'oval', texture: 'smooth' }
         ];
 
         // Audio context and sources
@@ -545,8 +555,8 @@
             
             rockConfigs.forEach((config, index) => {
                 // Create physics body
-                const x = 100 + (index % 6) * (window.innerWidth - 200) / 6 + Math.random() * 50;
-                const y = window.innerHeight - 200 - Math.random() * 100;
+                const x = 100 + (index % 10) * (window.innerWidth - 200) / 10 + Math.random() * 80;
+                const y = window.innerHeight - 200 - Math.random() * 150;
                 
                 const body = Bodies.circle(x, y, config.size / 2.2, {
                     restitution: 0.3,
