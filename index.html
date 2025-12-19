@@ -376,37 +376,25 @@
         // Matter.js module aliases
         const { Engine, Render, Runner, Bodies, Body, Composite, Mouse, MouseConstraint, Events } = Matter;
 
-        // Rock configurations with different visual styles
+        // Rock configurations using real PNG images
         const allRockConfigs = [
-            { id: 'turquoise', color: '#4fb8a8', size: 120, density: 0.003, shape: 'round', texture: 'smooth' },
-            { id: 'jade', color: '#7aa87a', size: 100, density: 0.002, shape: 'angular', texture: 'rough' },
-            { id: 'granite', color: '#c4b8a8', size: 220, density: 0.006, shape: 'irregular', texture: 'rough' },
-            { id: 'sandstone', color: '#d4a574', size: 170, density: 0.004, shape: 'round', texture: 'grainy' },
-            { id: 'obsidian', color: '#8b4f3f', size: 190, density: 0.005, shape: 'angular', texture: 'rough' },
-            { id: 'pumice', color: '#6b6b6b', size: 180, density: 0.002, shape: 'irregular', texture: 'porous' },
-            { id: 'lapis', color: '#3366aa', size: 150, density: 0.004, shape: 'round', texture: 'smooth' },
-            { id: 'marble', color: '#e8e4dc', size: 140, density: 0.004, shape: 'oval', texture: 'smooth' },
-            { id: 'quartz', color: '#c8d4dc', size: 110, density: 0.003, shape: 'angular', texture: 'crystalline' },
-            { id: 'limestone', color: '#d4c8b4', size: 160, density: 0.003, shape: 'irregular', texture: 'rough' },
-            { id: 'basalt', color: '#4a4a4a', size: 130, density: 0.005, shape: 'angular', texture: 'rough' },
-            { id: 'coral', color: '#f4e4d8', size: 135, density: 0.002, shape: 'irregular', texture: 'porous' },
-            { id: 'amethyst', color: '#9b7bb3', size: 145, density: 0.004, shape: 'angular', texture: 'crystalline' },
-            { id: 'rose-quartz', color: '#e8a4a8', size: 125, density: 0.003, shape: 'round', texture: 'smooth' },
-            { id: 'slate', color: '#5a6a7a', size: 155, density: 0.005, shape: 'angular', texture: 'rough' },
-            { id: 'terracotta', color: '#c88a6c', size: 115, density: 0.003, shape: 'irregular', texture: 'rough' },
-            { id: 'jade-light', color: '#a8c4a8', size: 95, density: 0.002, shape: 'oval', texture: 'smooth' },
-            { id: 'onyx', color: '#3a3a3a', size: 165, density: 0.006, shape: 'angular', texture: 'smooth' },
-            { id: 'seafoam', color: '#8fc4b8', size: 105, density: 0.002, shape: 'round', texture: 'smooth' },
-            { id: 'amber', color: '#d4a84c', size: 135, density: 0.003, shape: 'irregular', texture: 'smooth' },
-            { id: 'pearl', color: '#f4f0e8', size: 90, density: 0.002, shape: 'round', texture: 'smooth' },
-            { id: 'agate', color: '#b89c8c', size: 140, density: 0.004, shape: 'oval', texture: 'smooth' }
+            { id: 'blue-ice', image: 'images/seven360_91324_blue_ice_stone_on_white_background_--v_7_58484735-2875-43ed-8d5e-19c869fc8ebb.png', size: 180, density: 0.004 },
+            { id: 'scallop-shell', image: 'images/eselinu_closeup_seashell_--profile_sx7bpwx_--stylize_500_--v_7_d05417cd-0b54-4c6a-a3dc-b74bc444b6af.png', size: 200, density: 0.003 },
+            { id: 'mossy-pebble', image: 'images/grisgris8309_a_gray-brown_pebble_with_lime_green_patterns_on_it_b3ffabad-e2eb-4030-b550-55652c3a779d.png', size: 150, density: 0.005 },
+            { id: 'fluorite', image: 'images/instytutum_62369_A_naturally_shaped_fluorite_crystal_with_soft__9eec1402-55b6-45d6-b702-77b79f52f23b.png', size: 170, density: 0.004 },
+            { id: 'obsidian', image: 'images/lan8660_rounded_black_obsedian_stone_white_background_--raw_--v_6271fd32-9429-4cbb-b3be-bdbed5ee158b.png', size: 160, density: 0.006 },
+            { id: 'glass-agate', image: 'images/pendiento_43604_artistic_hand-blown_glass_component_on_a_white__c8cdcc1b-2e4f-4942-bfc5-cd64f4cffbe5.png', size: 140, density: 0.003 },
+            { id: 'conch-shell', image: 'images/monta.tattooer_pearly_hemifusus_shell_shell_opening_visible_pho_b7fde2a5-17cf-4eb6-bbc9-c9c28985fd44.png', size: 220, density: 0.003 },
+            { id: 'jade', image: 'images/nhbbsxcm_A_raw_piece_of_jade_with_a_delicate_satin-like_texture_70ab8eb3-2142-4984-9337-c2117b6c24df.png', size: 175, density: 0.004 },
+            { id: 'ocean-stone', image: 'images/pringlbo_A_single_smooth_ocean_stone_with_neutral_tone_isolated_e7935f8e-3b81-4b82-a00d-fc0d1e55d1b0.png', size: 190, density: 0.005 },
+            { id: 'oval-stone', image: 'images/maygin80_a_small_simple_oval_stone_no_background_dnd_item_artwo_8671c508-545c-4bb4-ab16-11f27a0e11f2.png', size: 145, density: 0.004 }
         ];
 
         // Detect if mobile device
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
-        // Use fewer stones on mobile (first 12), all stones on desktop
-        const rockConfigs = isMobile ? allRockConfigs.slice(0, 12) : allRockConfigs;
+        // Use fewer stones on mobile (first 7), all stones on desktop
+        const rockConfigs = isMobile ? allRockConfigs.slice(0, 7) : allRockConfigs;
 
         // Audio context and sources
         let audioContext = null;
@@ -492,124 +480,18 @@
         let mouseConstraint = null;
         const rocksContainer = document.getElementById('rocks-container');
 
-        // Create SVG rock shape
-        function createRockSVG(config) {
-            const { color, size, shape, texture, id } = config;
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('width', size * 1.2);
-            svg.setAttribute('height', size);
-            svg.setAttribute('viewBox', `0 0 ${size * 1.2} ${size}`);
-            
-            // Add gradient for depth
-            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-            const gradientId = `grad-${id}`;
-            const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-            gradient.setAttribute('id', gradientId);
-            gradient.setAttribute('x1', '0%');
-            gradient.setAttribute('y1', '0%');
-            gradient.setAttribute('x2', '100%');
-            gradient.setAttribute('y2', '100%');
-            
-            const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-            stop1.setAttribute('offset', '0%');
-            stop1.setAttribute('style', `stop-color:${lightenColor(color, 30)};stop-opacity:1`);
-            
-            const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-            stop2.setAttribute('offset', '100%');
-            stop2.setAttribute('style', `stop-color:${darkenColor(color, 20)};stop-opacity:1`);
-            
-            gradient.appendChild(stop1);
-            gradient.appendChild(stop2);
-            defs.appendChild(gradient);
-            svg.appendChild(defs);
-            
-            // Generate organic rock path
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = generateRockPath(size, shape);
-            path.setAttribute('d', d);
-            path.setAttribute('fill', `url(#${gradientId})`);
-            
-
-            
-            svg.appendChild(path);
-            
-            // Add subtle vein lines for some rocks
-            if (texture === 'smooth' || texture === 'crystalline') {
-                const vein = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                const veinD = generateVeinPath(size);
-                vein.setAttribute('d', veinD);
-                vein.setAttribute('stroke', lightenColor(color, 40));
-                vein.setAttribute('stroke-width', '1');
-                vein.setAttribute('fill', 'none');
-                vein.setAttribute('opacity', '0.5');
-                svg.appendChild(vein);
-            }
-            
-            return svg;
-        }
-
-        function generateRockPath(size, shape) {
-            const cx = size * 0.6;
-            const cy = size * 0.5;
-            const rx = size * 0.5;
-            const ry = size * 0.4;
-            const points = [];
-            const numPoints = shape === 'angular' ? 7 : 12;
-            
-            for (let i = 0; i < numPoints; i++) {
-                const angle = (i / numPoints) * Math.PI * 2;
-                let r = shape === 'round' ? 1 : (shape === 'angular' ? 0.85 + Math.random() * 0.3 : 0.8 + Math.random() * 0.4);
-                if (shape === 'oval') r = 1 + Math.sin(angle * 2) * 0.1;
-                const x = cx + Math.cos(angle) * rx * r;
-                const y = cy + Math.sin(angle) * ry * r;
-                points.push({ x, y });
-            }
-            
-            // Create smooth curve through points
-            let d = `M ${points[0].x} ${points[0].y}`;
-            for (let i = 0; i < points.length; i++) {
-                const p0 = points[(i - 1 + points.length) % points.length];
-                const p1 = points[i];
-                const p2 = points[(i + 1) % points.length];
-                const p3 = points[(i + 2) % points.length];
-                
-                const cp1x = p1.x + (p2.x - p0.x) / 6;
-                const cp1y = p1.y + (p2.y - p0.y) / 6;
-                const cp2x = p2.x - (p3.x - p1.x) / 6;
-                const cp2y = p2.y - (p3.y - p1.y) / 6;
-                
-                d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
-            }
-            d += ' Z';
-            return d;
-        }
-
-        function generateVeinPath(size) {
-            const startX = size * 0.2 + Math.random() * size * 0.2;
-            const startY = size * 0.2 + Math.random() * size * 0.2;
-            const endX = size * 0.6 + Math.random() * size * 0.3;
-            const endY = size * 0.6 + Math.random() * size * 0.3;
-            const midX = (startX + endX) / 2 + (Math.random() - 0.5) * size * 0.3;
-            const midY = (startY + endY) / 2 + (Math.random() - 0.5) * size * 0.3;
-            return `M ${startX} ${startY} Q ${midX} ${midY} ${endX} ${endY}`;
-        }
-
-        function lightenColor(color, percent) {
-            const num = parseInt(color.replace('#', ''), 16);
-            const amt = Math.round(2.55 * percent);
-            const R = Math.min(255, (num >> 16) + amt);
-            const G = Math.min(255, ((num >> 8) & 0x00FF) + amt);
-            const B = Math.min(255, (num & 0x0000FF) + amt);
-            return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
-        }
-
-        function darkenColor(color, percent) {
-            const num = parseInt(color.replace('#', ''), 16);
-            const amt = Math.round(2.55 * percent);
-            const R = Math.max(0, (num >> 16) - amt);
-            const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
-            const B = Math.max(0, (num & 0x0000FF) - amt);
-            return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
+        // Create rock image element
+        function createRockImage(config) {
+            const { image, size } = config;
+            const img = document.createElement('img');
+            img.src = image;
+            img.style.width = `${size}px`;
+            img.style.height = 'auto';
+            img.style.maxHeight = `${size}px`;
+            img.style.objectFit = 'contain';
+            img.style.userSelect = 'none';
+            img.style.pointerEvents = 'none';
+            return img;
         }
 
         // Create rocks
@@ -640,11 +522,11 @@
                 const element = document.createElement('div');
                 element.className = 'rock';
                 element.id = `rock-${config.id}`;
-                element.style.width = `${config.size * 1.2}px`;
+                element.style.width = `${config.size}px`;
                 element.style.height = `${config.size}px`;
-                
-                const svg = createRockSVG(config);
-                element.appendChild(svg);
+
+                const img = createRockImage(config);
+                element.appendChild(img);
                 rocksContainer.appendChild(element);
                 rockElements.push({ element, config, body });
             });
@@ -735,11 +617,11 @@
         // Update visual positions
         function updateRockPositions() {
             rockElements.forEach(({ element, config, body }) => {
-                element.style.left = `${body.position.x - config.size * 0.6}px`;
+                element.style.left = `${body.position.x - config.size * 0.5}px`;
                 element.style.top = `${body.position.y - config.size * 0.5}px`;
                 element.style.transform = `rotate(${body.angle}rad)`;
             });
-            
+
             requestAnimationFrame(updateRockPositions);
         }
 
